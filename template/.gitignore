@@ -1,0 +1,9 @@
+# Kit mémoire : le scratchpad est une mémoire de travail jetable — pas versionnée
+memoire/scratchpad/*
+!memoire/scratchpad/README.md
+
+# Réglages locaux personnels de Claude Code (non partagés)
+.claude/settings.local.json
+
+# macOS
+.DS_Store

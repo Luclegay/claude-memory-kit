@@ -1,0 +1,84 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Write(memoire/lecons/**)",
+      "Write(memoire/scratchpad/**)",
+      "Write(memoire/propositions/**)",
+      "Edit(memoire/MEMOIRE.md)",
+      "Edit(memoire/lecons/**)",
+      "Edit(memoire/scratchpad/**)",
+      "Edit(memoire/propositions/**)",
+      "Bash(grep *)",
+      "Bash(ls *)"
+    ],
+    "deny": [
+      "Write(memoire/organisation/**)",
+      "Edit(memoire/organisation/**)",
+      "Write(memoire/erreurs/journal.md)",
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/id_rsa*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-start.sh",
+            "statusMessage": "Chargement de la mémoire du projet…"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/garde-memoire.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/memoire-git.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/memoire-erreur.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/garde-tokens.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
