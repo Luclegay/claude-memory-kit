@@ -1,5 +1,7 @@
 # 🌙 Claude Memory Kit — une mémoire qui apprend de ses erreurs, pour vos agents Claude Code
 
+![Claude Memory Kit](claude-kit-memory.jpg)
+
 > Un kit prêt à l'emploi qui donne à [Claude Code](https://code.claude.com) une
 > **mémoire durable en simples fichiers**, une **boucle d'apprentissage des
 > erreurs**, des **garde-fous de sécurité** et une **vigie de consommation
